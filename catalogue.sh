@@ -55,7 +55,7 @@ VALIDATE $? "Downloading catalogue application"
 
 cd /app
 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>> $LOGFILE
 
 VALIDATE $? "unzipping catalogue" 
 
@@ -64,7 +64,7 @@ npm install -y &>> $LOGFILE
 VALIDATE $? "installing dependencies" 
 
 # use absolute, because catalogue.service exists there
-cp home/devops/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+cp home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
 
 VALIDATE $? "copying catalogue service file" 
 
@@ -80,7 +80,7 @@ systemctl start catalogue &>> $LOGFILE
 
 VALIDATE $? "start catalogue"
 
-cp home/devops/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 
 VALIDATE $? "copying mongodb repo"
 
