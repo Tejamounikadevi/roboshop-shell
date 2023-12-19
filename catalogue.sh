@@ -29,39 +29,39 @@ else
     echo "you are root user"
 fi # fi means reverse of if, indicating condition end
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>> $LOGFILE
 
-VALIDATE $? "Disabling current NodeJS" &>> $LOGFILE
+VALIDATE $? "Disabling current NodeJS" 
 
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>> $LOGFILE
 
-VALIDATE $? "Enabling NodeJS" &>> $LOGFILE
+VALIDATE $? "Enabling NodeJS" 
 
-dnf install nodejs -y
+dnf install nodejs -y &>> $LOGFILE
 
-VALIDATE $? "Installing NodeJS:18" &>> $LOGFILE
+VALIDATE $? "Installing NodeJS:18"
 
 Useradd roboshop
 
-VALIDATE $? "creating roboshop user" &>> $LOGFILE
+VALIDATE $? "creating roboshop user" 
 
 mkdir /app
 
-VALIDATE $? "creating app directory" &>> $LOGFILE
+VALIDATE $? "creating app directory" 
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
 
-VALIDATE $? "Downloading catalogue application" &>> $LOGFILE
+VALIDATE $? "Downloading catalogue application" 
 
 cd /app
 
 unzip /tmp/catalogue.zip
 
-VALIDATE $? "unzipping catalogue" &>> $LOGFILE
+VALIDATE $? "unzipping catalogue" 
 
-npm install 
+npm install &>> $LOGFILE
 
-VALIDATE $? "installing dependencies" &>> $LOGFILE
+VALIDATE $? "installing dependencies" 
 
 # use absolute, because catalogue.service exists there
 cp catalogue.service home/centos/roboshop-shell/etc/systemd/system/catalogue.service &>> $LOGFILE
@@ -84,10 +84,10 @@ cp home/centos/roboshop-shellmongo.repo /etc/systemd/system/catalogue.service
 
 VALIDATE $? "copying mongodb repo"
 
-dnf install mongodb-org-shell -y
+dnf install mongodb-org-shell -y &>> $LOGFILE
 
 VALIDATE $? "Installing mongodb client"
 
-mongo --host $MONGODG_HOST </app/schema/catalogue.js
+mongo --host $MONGODG_HOST </app/schema/catalogue.js &>> $LOGFILE
 
 VALIDATE $? "Loading catalogue data into MONGODB"
