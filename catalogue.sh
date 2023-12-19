@@ -45,7 +45,7 @@ useradd roboshop
 
 VALIDATE $? "creating roboshop user" 
 
-mkdir app/
+mkdir /app
 
 VALIDATE $? "creating app directory" 
 
@@ -53,7 +53,7 @@ curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zi
 
 VALIDATE $? "Downloading catalogue application" 
 
-cd app/
+cd /app
 
 unzip /tmp/catalogue.zip &>> $LOGFILE
 
@@ -80,7 +80,7 @@ systemctl start catalogue &>> $LOGFILE
 
 VALIDATE $? "start catalogue"
 
-cp home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "copying mongodb repo"
 
