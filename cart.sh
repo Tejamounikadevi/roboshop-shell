@@ -54,7 +54,7 @@ mkdir -p /app
 
 VALIDATE $? "creating app directory" 
 
-curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOGFILE
 
 VALIDATE $? "Downloading cart application" 
 
@@ -69,7 +69,7 @@ npm install &>> $LOGFILE
 VALIDATE $? "installing dependencies" 
 
 # use absolute, because cart.service exists there
-cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
 
 VALIDATE $? "copying cart service file" 
 
