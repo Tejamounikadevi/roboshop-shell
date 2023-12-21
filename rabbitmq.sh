@@ -50,9 +50,14 @@ systemctl start rabbitmq-server  &>> $LOGFILE
 
 VALIDATE $? "Starting rabbitmq server"
 
-rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
-
-VALIDATE $? "creating user"
+id roboshop #if roboshop user does not exit, then it is failure
+if [ $? -ne 0 ]
+then
+    rabbitmqctl add_user roboshop roboshop123
+    VALIDATE $? "creating user" 
+else
+    echo -e "roboshop user already exist $Y SKIPPING $N"
+fi
 
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
 
