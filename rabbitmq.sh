@@ -56,4 +56,4 @@ VALIDATE $? "creating user"
 
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
 
-VALIDATE $? "setting permission
+VALIDATE $? "setting permission"
