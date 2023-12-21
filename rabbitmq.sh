@@ -50,7 +50,7 @@ systemctl start rabbitmq-server  &>> $LOGFILE
 
 VALIDATE $? "Starting rabbitmq server"
 
-id roboshop roboshop123 #if roboshop user does not exit, then it is failure
+id roboshop #if roboshop user does not exit, then it is failure
 if [ $? -ne 0 ]
 then
     rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
